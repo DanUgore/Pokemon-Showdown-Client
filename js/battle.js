@@ -3566,7 +3566,7 @@ function Battle(frame, logFrame, noPreload) {
 					actions += '' + poke.getName() + ' intimidates ' + ofpoke.getLowerName() + '!';
 					break;
 				case 'unnerve':
-					actions += "" + poke.getName() + "'s Unnerve makes " + args[3] + "'s team too nervous to eat Berries!";
+					actions += "" + poke.getName() + "'s Unnerve makes " + args[3].name + "'s team too nervous to eat Berries!";
 					break;
 				default:
 					actions += "" + poke.getName() + " has " + ability.name + "!";
