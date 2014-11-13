@@ -3918,6 +3918,41 @@ var Battle = (function () {
 				}
 				break;
 
+			case '-newability':
+				var poke = this.getPokemon(args[1]);
+				var oldAbility = Tools.getAbility(args[2]);
+				var newAbility = Tools.getAbility(args[3]);
+				var effect = this.getPokemon(kwargs.from);
+				var ofpoke = this.getPokemon(kwargs.of);
+				if (kwargs.silent) {
+					// do nothing
+				} else {
+					// poke.getName() is not what we want. We just want the name of the pokemon without "The opposing" prepended to it.
+					// To avoid confusion we probably want to find a way of differentiating ally abilities from foe abilities
+					if (!kwargs.hideAbilities) actions += "[" + poke.name + "'s " + oldAbility.name + "] -> [" + poke.name + "'s " + newAbility.name + "]";
+					if (effect.id) {
+						switch (effect.id) {
+						case 'trace':
+							actions += "It traced " + ofpoke.getName() + "’s " + newAbility.name + "!"
+							break;
+						case 'mummy':
+							actions += "" + poke.getName() "'s Ability became Mummy!";
+							break;
+						case 'roleplay':
+							actions += "" + poke.getName() + " copied " + ofpoke.getLowerName() + "'s Ability!";
+							break;
+						case 'skillswap':
+							actions += "" + poke.getName() + " swapped Abilities with its target!";
+							break;
+						case 'entrainment':
+						// default:
+							actions += "" + poke.getName() + " acquired " + newAbility.name + "!";
+							break;
+						}
+					}
+				}
+				break;
+
 			case '-ability':
 				var poke = this.getPokemon(args[1]);
 				var ability = Tools.getAbility(args[2]);
